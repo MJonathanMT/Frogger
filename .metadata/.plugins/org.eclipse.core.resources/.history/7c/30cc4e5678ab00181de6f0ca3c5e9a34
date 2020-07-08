@@ -1,0 +1,90 @@
+import java.util.ArrayList;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+
+public class World {
+	
+	/** water area, in pixels */
+    private static final float WATER_MAX = 336f;
+    private static final float WATER_MIN = 96f; 
+    
+    /** grass area, in pixels */
+    private static final int GRASS_MAX = 672;
+    public static final int GRASS_MIN = 384;
+    
+    /** tile size, in pixels*/
+    public static final float TILE_SIZE = 48f;
+           
+	private Image grass;
+    
+	private ArrayList<Sprite> sprites = new ArrayList<>();
+	
+    public World() 
+    		throws SlickException {
+		// Perform initialization logic
+    	grass = new Image("assets/grass.png");
+    	
+    	/** water */
+        for(float i = 0f; i < App.SCREEN_WIDTH; i += TILE_SIZE) {
+			for(float j = WATER_MIN; j <= WATER_MAX; j += TILE_SIZE) {
+				sprites.add(new Water(i,j));
+			}
+		}  
+        float offSet = 0;
+        float sepDiff =  0;
+        
+        
+        for(int i = 0; i<4; i++) {
+        	offSet = 48;
+        	sepDiff = 6.5f*TILE_SIZE;        	
+        	sprites.add(new Bus(offSet + i*sepDiff, 432));
+        }
+        for(int i = 0; i<5; i++) {
+        	offSet = 0;
+        	sepDiff = 5f*TILE_SIZE;        	
+        	sprites.add(new Bus(offSet + i*sepDiff, 480));
+        }
+        for(int i = 0; i<2; i++) {
+        	offSet = 64;
+        	sepDiff = 12f*TILE_SIZE;        	
+        	sprites.add(new Bus(offSet + i*sepDiff, 528));
+        }
+        for(int i = 0; i<4; i++) {
+        	offSet = 128;
+        	sepDiff = 5f*TILE_SIZE;        	
+        	sprites.add(new Bus(offSet + i*sepDiff, 576));
+        }
+        for(int i = 0; i<3; i++) {
+        	offSet = 250;
+        	sepDiff = 6.5f*TILE_SIZE;        	
+        	sprites.add(new Bus(offSet + i*sepDiff, 624));
+        }
+        sprites.add(new Player());
+	}
+	
+	public void update(Input input, int delta) {
+		// Update all of the sprites in the game
+		for(int i = 0; i < delta; i++) {			
+			for(Sprite sprite: sprites) {
+				sprite.update(input, delta);
+			}
+		}
+	}
+	
+	public void render(Graphics g) {
+		// Draw all of the sprites in the game
+		/** grass */
+        for(int i = 0; i < App.SCREEN_WIDTH; i += TILE_SIZE) {
+			for(int j = GRASS_MIN; j <= GRASS_MAX; j += TILE_SIZE) {
+				if((j == GRASS_MIN) || (j == GRASS_MAX)) {
+					grass.drawCentered(i,j);
+				}
+			}
+		}
+        for(Sprite sprite : sprites) {
+        	sprite.render();
+        }
+	}
+}

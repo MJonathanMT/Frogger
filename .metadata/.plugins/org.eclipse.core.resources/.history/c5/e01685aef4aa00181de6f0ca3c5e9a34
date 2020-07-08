@@ -1,0 +1,23 @@
+
+public class Bus{	
+	
+	/** bus speed*/
+    public static final double BUS_SPEED = 0.15;
+  
+	public static String BUS_IMAGE = "assets/bus.png";	
+	
+    public Bus(float x, float y) {
+		super(BUS_IMAGE, x, y);
+	}
+    public void autoMove(){
+    	setX(getX() += BUS_SPEED);
+    }
+	@Override
+	public void contactSprite(Sprite bus) {
+		// Check if the enemy made contact with the player
+		// and if so, end the game
+		if (bus instanceof Player) {
+			System.exit(0);
+		}
+    }
+}

@@ -1,0 +1,15 @@
+
+public class Hazard extends Sprite {
+		
+	public Hazard(String imageSrc, float x, float y){
+		super(imageSrc, y, y);
+	}
+
+	public void contactSprite(Sprite otherSprite) {
+		// Check if the enemy made contact with the player
+		// and if so, end the game
+		if (otherSprite instanceof Player) {
+			System.exit(0);
+		}
+	}
+}

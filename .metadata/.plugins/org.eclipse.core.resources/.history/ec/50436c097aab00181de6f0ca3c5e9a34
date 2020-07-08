@@ -1,0 +1,17 @@
+import org.newdawn.slick.Input;
+
+public class Bus extends Hazard{	
+	
+	/** bus speed*/
+    public static final float BUS_SPEED = 0.15f;
+  
+	public static String BUS_IMAGE = "assets/bus.png";	
+	
+    public Bus(float x, float y) {
+		super(BUS_IMAGE, x, y);
+	}
+    public void update(Input input, int delta){
+    	setX(getX() + BUS_SPEED);	
+    	setBb(getX(), getY());
+    }	
+}

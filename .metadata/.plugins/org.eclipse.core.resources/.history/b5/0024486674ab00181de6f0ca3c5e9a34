@@ -1,0 +1,54 @@
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+//import utilities.BoundingBox;
+
+public class Sprite {
+	
+	private Image image;
+	private float x;
+	private float y;
+    public static final int BORDER_SIZE = 24;
+//	private BoundingBox bb;
+	
+	public Sprite(String imageSrc, float x, float y) { 
+		// Why would the constructor need a path to an image, and a coordinate?
+		try {
+			image = new Image(imageSrc);
+		}catch (SlickException e) {
+			e.printStackTrace();
+		}
+		
+		this.x = x;
+		this.y = y;
+		
+//		bb = new BoundingBox(image, x, y);
+	}
+	
+	public void update(Input input, int delta) {
+		// How can this one method deal with different types of sprites?
+	}
+	
+	public void render() {
+		// This should be pretty simple.
+		image.drawCentered(x,y);		
+	}
+	
+	public void contactSprite(Sprite other) {
+		// Should be called when one sprite makes contact with another. 
+	}
+	
+	public void withinScreen() {
+		x = Math.max(BORDER_SIZE, x);
+		x = Math.min(App.SCREEN_WIDTH - BORDER_SIZE, x);
+		y = Math.max(BORDER_SIZE, y);
+		y = Math.min(App.SCREEN_HEIGHT - BORDER_SIZE, y);
+	}
+	
+	public float getX() {return x;}
+	public void setX(float x) {this.x = x;}
+	public float getY() {return y;}
+	public void setY(float y) {this.y = y;}
+//	public BoundingBox getBb() {return bb;}
+//	public void setBb(BoundingBox bb) {this.bb = bb;}	
+}

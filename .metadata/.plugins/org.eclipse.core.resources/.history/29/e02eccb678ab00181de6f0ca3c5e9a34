@@ -1,0 +1,11 @@
+
+public class Water extends Hazard {
+
+	public static String WATER_IMAGE = "assets/water.png";
+	
+	public Water(float x, float y) {
+		super(WATER_IMAGE, x, y);
+		// TODO Auto-generated constructor stub
+	}
+
+}

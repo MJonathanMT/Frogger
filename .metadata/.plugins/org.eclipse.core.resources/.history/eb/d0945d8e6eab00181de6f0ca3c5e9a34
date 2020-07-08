@@ -1,0 +1,37 @@
+import org.newdawn.slick.Input;
+
+public class Player extends Sprite {
+	
+	public static String PLAYER_IMAGE = "assets/frog.png";	
+	public static int PLAYER_X = 512;
+    public static int PLAYER_Y = 720;
+        
+    public Player() {
+    	super(PLAYER_IMAGE, PLAYER_X, PLAYER_Y);
+    }
+    
+    @Override
+    public void update(Input input, int delta) {
+    	moves(input, delta);
+    	withinScreen();  
+		setBB(getX(), getY());  	
+    } 
+    
+    private void moves(Input input, int delta) {    	
+		// handle vertical movement
+		if (input.isKeyPressed(Input.KEY_UP)) {
+			setY(getY() - World.TILE_SIZE);
+		}
+		if (input.isKeyPressed(Input.KEY_DOWN)) {
+			setY(getY() + World.TILE_SIZE);
+		}
+		
+    	// handle horizontal movement
+    	if (input.isKeyPressed(Input.KEY_LEFT)) {
+			setX(getX() - World.TILE_SIZE);
+		}
+		if (input.isKeyPressed(Input.KEY_RIGHT)) {
+			setX(getX() + World.TILE_SIZE);
+		}		
+    }
+}
